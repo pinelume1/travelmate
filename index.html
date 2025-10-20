@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>TravelMate - Your Ultimate Travel Companion</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-plane"></i>
+                <span>TravelMate</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="booking.html" class="nav-link">Booking</a></li>
+                <li><a href="shopping.html" class="nav-link">Shopping</a></li>
+                <li><a href="tracking.html" class="nav-link">Tracking</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover Your Next Adventure</h1>
+            <p>Book flights, hotels, shop for travel essentials, and track your journey with our AI-powered travel companion</p>
+            <div class="hero-buttons">
+                <a href="booking.html" class="btn btn-primary">Start Booking</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card">
+                <i class="fas fa-map-marked-alt"></i>
+                <span>Explore 200+ Destinations</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Everything You Need for Perfect Travel</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Smart Booking</h3>
+                    <p>Book flights, hotels, and activities with our intelligent search engine</p>
+                    <a href="booking.html" class="feature-link">Start Booking <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Travel Shopping</h3>
+                    <p>Shop for travel essentials, gear, and accessories all in one place</p>
+                    <a href="shopping.html" class="feature-link">Browse Shop <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Activity Tracking</h3>
+                    <p>Track your itinerary, expenses, and memories throughout your journey</p>
+                    <a href="tracking.html" class="feature-link">Track Activities <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Assistant</h3>
+                    <p>Get personalized recommendations and instant help from our AI travel guide</p>
+                    <button class="feature-link" onclick="toggleAIChat()">Chat with AI <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="destinations">
+        <div class="container">
+            <h2>Popular Destinations</h2>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <div class="destination-image" style="background: linear-gradient(45deg, #FF6B6B, #4ECDC4);"></div>
+                    <div class="destination-info">
+                        <h3>Paris, France</h3>
+                        <p>From $899</p>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-image" style="background: linear-gradient(45deg, #A8E6CF, #FFD93D);"></div>
+                    <div class="destination-info">
+                        <h3>Tokyo, Japan</h3>
+                        <p>From $1,299</p>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>4.9</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <div class="destination-image" style="background: linear-gradient(45deg, #FF8A80, #FFCC02);"></div>
+                    <div class="destination-info">
+                        <h3>Bali, Indonesia</h3>
+                        <p>From $699</p>
+                        <div class="destination-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>4.7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Interface -->
+    <div id="ai-chat" class="ai-chat-container">
+        <div class="ai-chat-header">
+            <div class="ai-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="ai-info">
+                <h3>TravelMate AI</h3>
+                <span class="ai-status">Online</span>
+            </div>
+            <button class="ai-close" onclick="toggleAIChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="ai-chat-messages" id="ai-messages">
+            <div class="ai-message">
+                <div class="ai-avatar-small">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>Hello! I'm your AI travel assistant. How can I help you plan your perfect trip today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="ai-chat-input">
+            <input type="text" id="ai-input" placeholder="Ask me anything about travel...">
+            <button onclick="sendAIMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span>TravelMate</span>
+                    </div>
+                    <p>Your ultimate travel companion for booking, shopping, and tracking your adventures.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="booking.html">Booking</a></li>
+                        <li><a href="shopping.html">Shopping</a></li>
+                        <li><a href="tracking.html">Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TravelMate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+    <script src="./ai-assistant.js"></script>
+</body>
+
+</html>

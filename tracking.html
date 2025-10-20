@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Activity Tracking - TravelMate</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-plane"></i>
+                <span>TravelMate</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="booking.html" class="nav-link">Booking</a></li>
+                <li><a href="shopping.html" class="nav-link">Shopping</a></li>
+                <li><a href="tracking.html" class="nav-link active">Tracking</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tracking Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Activity Tracking</h1>
+            <p>Track your itinerary, expenses, and travel memories</p>
+        </div>
+    </section>
+
+    <!-- Tracking Dashboard -->
+    <section class="tracking-section">
+        <div class="container">
+            <!-- Tracking Tabs -->
+            <div class="tracking-tabs">
+                <button class="tab-btn active" onclick="switchTrackingTab('itinerary')">
+                    <i class="fas fa-route"></i>
+                    Itinerary
+                </button>
+                <button class="tab-btn" onclick="switchTrackingTab('expenses')">
+                    <i class="fas fa-dollar-sign"></i>
+                    Expenses
+                </button>
+                <button class="tab-btn" onclick="switchTrackingTab('memories')">
+                    <i class="fas fa-camera"></i>
+                    Memories
+                </button>
+                <button class="tab-btn" onclick="switchTrackingTab('analytics')">
+                    <i class="fas fa-chart-bar"></i>
+                    Analytics
+                </button>
+            </div>
+
+            <!-- Itinerary Tab -->
+            <div id="itinerary" class="tracking-tab-content active">
+                <div class="tracking-header">
+                    <h2>Travel Itinerary</h2>
+                    <button class="btn btn-primary" onclick="addItineraryItem()">
+                        <i class="fas fa-plus"></i>
+                        Add Activity
+                    </button>
+                </div>
+                
+                <div class="itinerary-timeline" id="itinerary-timeline">
+                    <!-- Itinerary items will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Expenses Tab -->
+            <div id="expenses" class="tracking-tab-content">
+                <div class="tracking-header">
+                    <h2>Expense Tracker</h2>
+                    <button class="btn btn-primary" onclick="addExpense()">
+                        <i class="fas fa-plus"></i>
+                        Add Expense
+                    </button>
+                </div>
+
+                <div class="expense-summary">
+                    <div class="expense-card">
+                        <div class="expense-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="expense-info">
+                            <h3>Total Spent</h3>
+                            <p class="expense-amount">$<span id="total-expenses">0.00</span></p>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <div class="expense-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="expense-info">
+                            <h3>Budget Remaining</h3>
+                            <p class="expense-amount">$<span id="budget-remaining">2000.00</span></p>
+                        </div>
+                    </div>
+                    <div class="expense-card">
+                        <div class="expense-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="expense-info">
+                            <h3>Daily Average</h3>
+                            <p class="expense-amount">$<span id="daily-average">0.00</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expense-list" id="expense-list">
+                    <!-- Expenses will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Memories Tab -->
+            <div id="memories" class="tracking-tab-content">
+                <div class="tracking-header">
+                    <h2>Travel Memories</h2>
+                    <button class="btn btn-primary" onclick="addMemory()">
+                        <i class="fas fa-plus"></i>
+                        Add Memory
+                    </button>
+                </div>
+
+                <div class="memories-grid" id="memories-grid">
+                    <!-- Memories will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tracking-tab-content">
+                <div class="tracking-header">
+                    <h2>Travel Analytics</h2>
+                </div>
+
+                <div class="analytics-dashboard">
+                    <div class="analytics-card">
+                        <h3>Trip Statistics</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Countries Visited:</span>
+                            <span class="stat-value" id="countries-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Cities Explored:</span>
+                            <span class="stat-value" id="cities-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Activities Completed:</span>
+                            <span class="stat-value" id="activities-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Photos Taken:</span>
+                            <span class="stat-value" id="photos-count">0</span>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>Expense Breakdown</h3>
+                        <div class="expense-category">
+                            <span class="category-name">Accommodation</span>
+                            <div class="category-bar">
+                                <div class="category-fill" style="width: 40%"></div>
+                            </div>
+                            <span class="category-amount">$800</span>
+                        </div>
+                        <div class="expense-category">
+                            <span class="category-name">Food & Dining</span>
+                            <div class="category-bar">
+                                <div class="category-fill" style="width: 30%"></div>
+                            </div>
+                            <span class="category-amount">$600</span>
+                        </div>
+                        <div class="expense-category">
+                            <span class="category-name">Transportation</span>
+                            <div class="category-bar">
+                                <div class="category-fill" style="width: 20%"></div>
+                            </div>
+                            <span class="category-amount">$400</span>
+                        </div>
+                        <div class="expense-category">
+                            <span class="category-name">Activities</span>
+                            <div class="category-bar">
+                                <div class="category-fill" style="width: 10%"></div>
+                            </div>
+                            <span class="category-amount">$200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Itinerary Modal -->
+    <div id="itinerary-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Activity</h2>
+                <span class="close" onclick="closeItineraryModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Activity Title</label>
+                    <input type="text" id="activity-title" placeholder="e.g., Visit Eiffel Tower">
+                </div>
+                <div class="form-group">
+                    <label>Date & Time</label>
+                    <input type="datetime-local" id="activity-datetime">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="activity-location" placeholder="e.g., Paris, France">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="activity-category">
+                        <option value="sightseeing">Sightseeing</option>
+                        <option value="dining">Dining</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="accommodation">Accommodation</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="shopping">Shopping</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="activity-notes" placeholder="Additional notes or details..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeItineraryModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveItineraryItem()">Save Activity</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div id="expense-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Expense</h2>
+                <span class="close" onclick="closeExpenseModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="expense-description" placeholder="e.g., Dinner at local restaurant">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Amount</label>
+                        <input type="number" id="expense-amount" placeholder="0.00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Currency</label>
+                        <select id="expense-currency">
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="JPY">JPY</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="expense-category">
+                        <option value="accommodation">Accommodation</option>
+                        <option value="food">Food & Dining</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="activities">Activities</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="expense-date">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeExpenseModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveExpense()">Save Expense</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Memory Modal -->
+    <div id="memory-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Memory</h2>
+                <span class="close" onclick="closeMemoryModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="memory-title" placeholder="e.g., Amazing sunset at the beach">
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="memory-location" placeholder="e.g., Santorini, Greece">
+                </div>
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="memory-date">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="memory-description" placeholder="Describe your memory..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="rating-input">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeMemoryModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveMemory()">Save Memory</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span>TravelMate</span>
+                    </div>
+                    <p>Your ultimate travel companion for booking, shopping, and tracking your adventures.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="booking.html">Booking</a></li>
+                        <li><a href="shopping.html">Shopping</a></li>
+                        <li><a href="tracking.html">Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TravelMate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

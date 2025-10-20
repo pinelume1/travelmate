@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Booking - TravelMate</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-plane"></i>
+                <span>TravelMate</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="booking.html" class="nav-link active">Booking</a></li>
+                <li><a href="shopping.html" class="nav-link">Shopping</a></li>
+                <li><a href="tracking.html" class="nav-link">Tracking</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Booking Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Book Your Perfect Trip</h1>
+            <p>Find and book flights, hotels, and activities at the best prices</p>
+        </div>
+    </section>
+
+    <!-- Booking Tabs -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-tabs">
+                <button class="tab-btn active" onclick="switchTab('flights')">
+                    <i class="fas fa-plane"></i>
+                    Flights
+                </button>
+                <button class="tab-btn" onclick="switchTab('hotels')">
+                    <i class="fas fa-bed"></i>
+                    Hotels
+                </button>
+                <button class="tab-btn" onclick="switchTab('activities')">
+                    <i class="fas fa-map-marked-alt"></i>
+                    Activities
+                </button>
+            </div>
+
+            <!-- Flight Booking -->
+            <div id="flights" class="tab-content active">
+                <div class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-plane-departure"></i>
+                                <input type="text" placeholder="Departure city" id="flight-from">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>To</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-plane-arrival"></i>
+                                <input type="text" placeholder="Destination city" id="flight-to">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Departure Date</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="flight-departure">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Return Date</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="flight-return">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Passengers</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <select id="flight-passengers">
+                                    <option value="1">1 Passenger</option>
+                                    <option value="2">2 Passengers</option>
+                                    <option value="3">3 Passengers</option>
+                                    <option value="4">4+ Passengers</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="searchFlights()">
+                        <i class="fas fa-search"></i>
+                        Search Flights
+                    </button>
+                </div>
+
+                <!-- Flight Results -->
+                <div id="flight-results" class="search-results" style="display: none;">
+                    <h3>Available Flights</h3>
+                    <div class="results-grid">
+                        <!-- Flight results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel Booking -->
+            <div id="hotels" class="tab-content">
+                <div class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <input type="text" placeholder="City or hotel name" id="hotel-destination">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Check-in Date</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="hotel-checkin">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Check-out Date</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="hotel-checkout">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Guests</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-users"></i>
+                                <select id="hotel-guests">
+                                    <option value="1">1 Guest</option>
+                                    <option value="2">2 Guests</option>
+                                    <option value="3">3 Guests</option>
+                                    <option value="4">4+ Guests</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="searchHotels()">
+                        <i class="fas fa-search"></i>
+                        Search Hotels
+                    </button>
+                </div>
+
+                <!-- Hotel Results -->
+                <div id="hotel-results" class="search-results" style="display: none;">
+                    <h3>Available Hotels</h3>
+                    <div class="results-grid">
+                        <!-- Hotel results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activities Booking -->
+            <div id="activities" class="tab-content">
+                <div class="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <input type="text" placeholder="City or location" id="activity-destination">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Activity Type</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-tag"></i>
+                                <select id="activity-type">
+                                    <option value="">All Activities</option>
+                                    <option value="tours">Tours & Sightseeing</option>
+                                    <option value="adventure">Adventure Sports</option>
+                                    <option value="cultural">Cultural Experiences</option>
+                                    <option value="food">Food & Dining</option>
+                                    <option value="entertainment">Entertainment</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="activity-date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Participants</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-users"></i>
+                                <select id="activity-participants">
+                                    <option value="1">1 Person</option>
+                                    <option value="2">2 People</option>
+                                    <option value="3">3 People</option>
+                                    <option value="4">4+ People</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-large" onclick="searchActivities()">
+                        <i class="fas fa-search"></i>
+                        Search Activities
+                    </button>
+                </div>
+
+                <!-- Activity Results -->
+                <div id="activity-results" class="search-results" style="display: none;">
+                    <h3>Available Activities</h3>
+                    <div class="results-grid">
+                        <!-- Activity results will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Your Booking</h2>
+                <span class="close" onclick="closeBookingModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="booking-details">
+                <!-- Booking details will be populated by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeBookingModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="confirmBooking()">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span>TravelMate</span>
+                    </div>
+                    <p>Your ultimate travel companion for booking, shopping, and tracking your adventures.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="booking.html">Booking</a></li>
+                        <li><a href="shopping.html">Shopping</a></li>
+                        <li><a href="tracking.html">Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TravelMate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
